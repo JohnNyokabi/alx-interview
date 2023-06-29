@@ -4,6 +4,7 @@ representing the pascals triangle of `n`"""
 
 
 def pascal_triangle(n):
+    """pascal triangle logic"""
     if (n <= 0):
         return []
 
