@@ -8,10 +8,12 @@ import sys
 def print_stats(total_size, status_counts):
     """Displays the total size and status count metrics"""
     print(f"File size: {total_size}")
-    for status, count in sorted(status_counts.items()):
-        print(f"{status}: {count}")
-        
+    for status in sorted(status_counts.keys()):
+        if status in {200, 301, 400, 401, 403, 404, 405, 500}:
+            print(f"{status}: {status_counts[status]}")
+
 def parse_line(line):
+    """Read and parse data"""
     try:
         elem = line.strip().split()
         if len(elem) >= 7:
@@ -25,7 +27,7 @@ def parse_line(line):
 def compute_metrics():
     """computes total size and status counts"""
     total_size = 0
-    status_counts = {}
+    status_counts = {200: 0, 301: 0, 400: 0, 401: 0, 403: 0, 404: 0, 405: 0, 500: 0}
     
     try:
         for i, line in enumerate(sys.stdin, 1):
@@ -34,9 +36,7 @@ def compute_metrics():
                 total_size += file_size
                 if status_code in status_counts:
                     status_counts[status_code] += 1
-                else:
-                    status_counts[status_code] = 1
-                    
+
             if i % 10 == 0:
                 print_stats(total_size, status_counts)
                 print()
