@@ -46,6 +46,8 @@ def compute_metrics():
                 print()
 
     except KeyboardInterrupt:
+        
+        print_stats(total_size, status_counts)
         pass
 
     print_stats(total_size, status_counts)
