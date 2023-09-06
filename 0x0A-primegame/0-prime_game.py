@@ -15,8 +15,8 @@ def is_prime(n):
 def add_prime(n, primes):
     """ Add prime to list """
     prime_count = primes[-1]
-    if n > last_prime:
-        for i in range(last_prime + 1, n + 1):
+    if n > prime_count:
+        for i in range(prime_count + 1, n + 1):
             if is_prime(i):
                 primes.append(i)
             else:
